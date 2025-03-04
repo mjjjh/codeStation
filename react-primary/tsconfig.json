@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "Preserve",
+      "jsx": "preserve",
+      "lib": ["dom","ES6"]
+    },
+    "include": [
+      "src/**/*"
+    ]
+}
