@@ -1,0 +1,14 @@
+.navigator {
+  color: royalblue;
+  text-decoration: none;
+}
+
+.headerRight {
+  display: flex;
+  gap: 10px;
+}
+
+.navigator:active {
+  color: #fff;
+  background-color: royalblue;
+}

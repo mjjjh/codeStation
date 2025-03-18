@@ -9,7 +9,7 @@ function funcComponet() {
     useEffect(() => {
         console.log("执行副作用函数");
         return () => {
-            console.log("清理副作用函数"); 
+            console.log("清理副作用函数");
         }
     },[count])
 
