@@ -23,3 +23,8 @@
 .icon-jiangbei:before {
   content: "\e660";
 }
+
+:root {
+  --primary-color: #4096ff;
+  --primary-color-active: #096dd9;
+}

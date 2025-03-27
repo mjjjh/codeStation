@@ -34,9 +34,14 @@ router.post("/login", async function (req, res, next) {
     next(new ValidationError("验证码错误"));
     return;
   }
-  const result = await loginService(req.body);
-  // 对返回数据进行格式化
-  res.send(formatResponse(0, "", result));
+  try {
+    const result = await loginService(req.body);
+    // 对返回数据进行格式化
+    res.send(formatResponse(0, "", result));
+  } catch(err) {
+    console.log("错误：",err);
+    
+  }
 });
 
 /**
