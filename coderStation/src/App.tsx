@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Layout } from 'antd';
 import RouterConfig from './router';
-import { initialUserInfo,changeLoginStatus } from './store/userSlice';
+import { initialUserInfo, changeLoginStatus } from './store/userSlice';
 import PageFooter from './components/PageFooter';
 import NavHeader from './components/NavHeader';
 import LoginForm from './components/LoginForm';
 
-import { getUserInfoToken, getUserInfo, userInfoData } from './api/user';
+import { getUserInfoToken, getUserInfo } from './api/user';
 
 const { Header, Footer, Content } = Layout;
 

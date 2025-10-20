@@ -1,6 +1,5 @@
-import React from 'react';
 
-function Interviews(props) {
+function Interviews() {
     return (
         <div>
             面试题

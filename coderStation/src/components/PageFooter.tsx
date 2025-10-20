@@ -1,7 +1,5 @@
-import React, { use } from 'react';
 
-
-function PageFooter(props) {
+function PageFooter() {
     return (
         <div>
             <p className="links">

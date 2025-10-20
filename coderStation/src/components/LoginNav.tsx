@@ -7,7 +7,7 @@ import style from '../css/LoginNav.module.css'
 import { clearUserInfo } from "../store/userSlice";
 import { useDispatch } from "react-redux";
 
-export default function LoginNav(props) {
+export default function LoginNav(props: { openModal: () => void }) {
     const { isLogin, userInfo } = useSelector((state: any) => state.user)
 
     const navigate = useNavigate();
@@ -34,7 +34,7 @@ export default function LoginNav(props) {
             />
         )
         loginStatus = (
-            <Popover content={content} placement="bottom" trigger="hover" style={{padding:0}}>
+            <Popover content={content} placement="bottom" trigger="hover" style={{ padding: 0 }}>
                 <Avatar src={<Image
                     preview={false}
                     src={userInfo.avatar}

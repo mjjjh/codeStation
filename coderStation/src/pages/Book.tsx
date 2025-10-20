@@ -1,6 +1,5 @@
-import React from 'react';
 
-function Book(props) {
+function Book() {
     return (
         <div>
             书籍
