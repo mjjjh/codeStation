@@ -10,6 +10,9 @@ const {
   findIssueCommentByIdDao,
   deleteCommentDao,
 } = require("../dao/commentDao");
+const {
+  findUserByIdDao
+} = require("../dao/userDao");
 const { validate } = require("validate.js");
 const { issueRule } = require("./rules");
 const { ValidationError } = require("../utils/errors");
@@ -18,14 +21,49 @@ const { ValidationError } = require("../utils/errors");
  * 按分页查询问答
  */
 module.exports.findIssueByPageService = async function (queryObj) {
-  return await findIssueByPageDao(queryObj);
+  // 获取分页数据
+  const result = await findIssueByPageDao(queryObj);
+  
+  // 如果有数据，为每条记录添加用户昵称
+  if (result.data && result.data.length > 0) {
+    for (let i = 0; i < result.data.length; i++) {
+      const issue = result.data[i];
+      if (issue.userId) {
+        try {
+          const userInfo = await findUserByIdDao(issue.userId);
+          if (userInfo && userInfo.nickname) {
+            issue.nickname = userInfo.nickname;
+          }
+        } catch (error) {
+          console.error("获取用户昵称失败:", error);
+        }
+      }
+    }
+  }
+  
+  return result;
 };
 
 /**
  * 根据 id 获取其中一个问答信息
  */
 module.exports.findIssueByIdService = async function (id) {
-  return await findIssueByIdDao(id);
+  // 获取问答信息
+  const issue = await findIssueByIdDao(id);
+  
+  // 如果存在且有userId，获取用户昵称
+  if (issue && issue.userId) {
+    try {
+      const userInfo = await findUserByIdDao(issue.userId);
+      if (userInfo && userInfo.nickname) {
+        issue.nickname = userInfo.nickname;
+      }
+    } catch (error) {
+      console.error("获取用户昵称失败:", error);
+    }
+  }
+  
+  return issue;
 };
 
 /**
