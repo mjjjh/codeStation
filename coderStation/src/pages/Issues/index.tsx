@@ -6,6 +6,7 @@ import PageHeader from '@/components/PageHeader';
 import IssueItem from './components/IssueItem';
 import AddButton from '@/pages/Issues/components/AddButton';
 import Recommend from './components/Recommend';
+import ScoreRank from './components/ScoreRank';
 import style from './style.module.css'
 export const Issues: React.FC = () => {
     const [issuesList, setIssuesList] = useState<IIssueReqDate[]>([]);
@@ -47,6 +48,7 @@ export const Issues: React.FC = () => {
             <div className={style.rightSide}>
                 <AddButton></AddButton>
                 <Recommend></Recommend>
+                <ScoreRank></ScoreRank>
             </div>
         </div>
     );

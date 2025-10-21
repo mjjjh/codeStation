@@ -32,3 +32,20 @@ export interface ITypeRes {
     _id: string;
     typeName: string;
 }
+
+
+export type topUserInfo = {
+    avatar: string;
+    enabled: boolean;
+    intro: string;
+    lastLoginDate: string;
+    loginId: string;
+    loginPwd: string;
+    mail: string;
+    nickname: string;
+    points: number;
+    qq: string;
+    registerDate: string;
+    wechat: string;
+    _id: string;
+}

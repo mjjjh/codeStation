@@ -9,16 +9,17 @@ const Recommend: React.FC = () => {
         <Card title="推荐内容" style={{ width: 300 }}>
             <Carousel autoplay>
                 <div>
-                    <h3 className={style.contentStyle}>1</h3>
+                    {/* 随机图片 */}
+                    <img src="https://img.yzcdn.com/vant/cat.jpeg" className={style.contentStyle} />
                 </div>
                 <div>
-                    <h3 className={style.contentStyle}>2</h3>
+                    <img src="https://img.yzcdn.com/vant/cat.jpeg" className={style.contentStyle} />
                 </div>
                 <div>
-                    <h3 className={style.contentStyle}>3</h3>
+                    <img src="https://img.yzcdn.com/vant/cat.jpeg" className={style.contentStyle} />
                 </div>
                 <div>
-                    <h3 className={style.contentStyle}>4</h3>
+                    <img src="https://img.yzcdn.com/vant/cat.jpeg" className={style.contentStyle} />
                 </div>
             </Carousel>
             <RecommendItem noId="1" title="利用使用 Cursor 修复 Ant Design Pro Components 的 issues" href="https://segmentfault.com/a/1190000047298448"></RecommendItem>
