@@ -62,6 +62,9 @@ module.exports.findIssueByIdService = async function (id) {
       console.error("获取用户昵称失败:", error);
     }
   }
+  // 浏览数加一
+  issue.scanNumber += 1;
+  await issue.save();
   
   return issue;
 };

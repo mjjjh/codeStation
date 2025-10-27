@@ -23,6 +23,8 @@ const commentSchema = new mongoose.Schema(
     commentContent: String, // 对应评论
     commentDate: String, // 评论日期
     commentType: Number, // 评论类型
+    nickname: String, // 昵称
+    avatar: String, // 头像
   },
   {
     versionKey: false,

@@ -11,7 +11,12 @@ const {
   findIssueCommentByIdDao,
   findBookCommentByIdDao,
 } = require("../dao/commentDao");
+const {
+  findUserByIdDao
+} = require("../dao/userDao");
 
+const {findIssueByIdService} = require("./issueService");
+const {findBookByIdService} = require("./bookService");
 const { commentRule } = require("./rules");
 const { ValidationError } = require("../utils/errors");
 
@@ -29,7 +34,26 @@ module.exports.findCommentByPageAndTypeService = async function (
  * 按照分页获取问答模块某一问题对应的评论
  */
 module.exports.findIssueCommentByIdService = async function (id, pager) {
-  return await findIssueCommentByIdDao(id, pager);
+  const res = await findIssueCommentByIdDao(id, pager);
+    // 如果存在且有userId，获取用户昵称
+    if (res) {
+      for(item in res.data) {
+        if (res.data[item].userId) {
+          try {
+            const userInfo = await findUserByIdDao(res.data[item].userId);
+            if (userInfo) {
+              res.data[item].nickname = userInfo.nickname;
+              res.data[item].avatar = userInfo.avatar;
+            }
+          } catch (error) {
+            console.error("获取用户昵称失败:", error);
+          }
+        }
+      }
+    }
+    
+    
+    return res;
 };
 
 /**
@@ -54,6 +78,17 @@ module.exports.addCommentService = async function (newCommentInfo) {
   
   return validate.async(newCommentInfo, commentRule).then(
     async function () {
+
+      // 评论数加一
+      if (newCommentInfo.issueId) {
+        const issue = await findIssueByIdService(newCommentInfo.issueId);
+        issue.commentNumber += 1;
+        await issue.save();
+      } else {
+        const book = await findBookByIdService(newCommentInfo.bookId);
+        book.commentNumber += 1;
+        await book.save();
+      }
       // 增加评论日期字段
       newCommentInfo.commentDate = new Date().getTime().toString();
       return await addCommentDao(newCommentInfo);
