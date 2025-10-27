@@ -7,6 +7,7 @@ import { initialUserInfo, changeLoginStatus } from './store/userSlice';
 import PageFooter from './components/PageFooter';
 import NavHeader from './components/NavHeader';
 import LoginForm from './components/LoginForm';
+import { useNavigate } from 'react-router-dom';
 
 import { getUserInfoToken, getUserInfo } from './api/user';
 
@@ -16,6 +17,9 @@ const { Header, Footer, Content } = Layout;
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
   // 打开弹框
   const showModal = () => {
     setIsModalOpen(true);
@@ -32,9 +36,12 @@ function App() {
       const token = localStorage.getItem('userToken');
       if (!token) return;
       const res = await getUserInfoToken();
+      console.log(res, ';');
+
       if (!res.data) {
         // token过期
         localStorage.removeItem('userToken');
+        navigate('/');
         return;
       }
       // 通过id获取用户信息
@@ -49,7 +56,7 @@ function App() {
 
   return (
     <div className='App'>
-      <Layout>
+      <Layout className='layout'>
         <Header className='header'>
           <NavHeader openModal={showModal} />
         </Header>

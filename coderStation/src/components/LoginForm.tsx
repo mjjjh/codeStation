@@ -19,9 +19,9 @@ import {
     register,
     login,
     userFormInfoReq,
-    userInfoData,
     getUserInfo,
 } from "../api/user";
+import { IUserCommonData } from "@/types/api";
 import { initialUserInfo, changeLoginStatus } from "../store/userSlice";
 import style from "../css/LoginForm.module.css";
 // import style from '../css/LoginForm.module.css'
@@ -134,7 +134,7 @@ export default function LoginForm(props: LoginFormProp) {
             getCaptchaReq();
             return;
         }
-        const resData: userInfoData = res.data as userInfoData;
+        const resData: IUserCommonData = res.data;
 
         if (!resData.data) {
             message.error("用户账号或密码错误");

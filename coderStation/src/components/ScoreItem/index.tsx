@@ -1,11 +1,11 @@
 import React from "react";
-import { topUserInfo } from "@/types/api"
+import { IUserInfo } from "@/types/api"
 
 import style from "./style.module.css"
 import { Avatar } from "antd";
 
 type ScoreItemProps = {
-    topUserInfo: topUserInfo;
+    topUserInfo: IUserInfo;
     rank: number;
 }
 
@@ -34,7 +34,7 @@ const ScoreRank: React.FC<ScoreItemProps> = ({ topUserInfo, rank }) => {
             <div className={style.left}>
                 <div className={style.rank}>{rankShow}</div>
                 <Avatar className={style.avatar} src={topUserInfo.avatar} />
-                <div className={style.nickname}>{topUserInfo.nickname}</div>
+                <div className={style.nickName}>{topUserInfo.nickname}</div>
             </div>
             <div className={style.right}>{topUserInfo.points}</div>
         </div>

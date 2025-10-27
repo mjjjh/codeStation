@@ -1,0 +1,26 @@
+.comment {
+    display: grid;
+    width: 90%;
+    grid-template-columns: minmax(50px, 5%) 95%;
+    gap: 10px;
+    align-items: start;
+    margin-top: 10px;
+}
+
+.avatar {
+    justify-self: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+
+.questioner {
+    display: flex;
+    align-items: end;
+    gap: 10px;
+    font-weight: 200;
+}

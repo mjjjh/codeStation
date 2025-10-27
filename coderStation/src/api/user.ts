@@ -1,6 +1,6 @@
 import request from "./request";
-import { topUserInfo } from "@/types/api";
-
+import { IUserCommonData, IUserInfo } from "@/types/api";
+import { IResponse } from "@/types/common";
 /**
  * 获取验证码
  * @returns 
@@ -12,26 +12,13 @@ export function getCaptcha(): Promise<string> {
     })
 }
 
-export type userInfoData = {
-    data: {
-        enabled: boolean,
-        loginId: string,
-        _id: string,
-    },
-    token: string
-}
 
-type userRes<T> = {
-    code: number,
-    msg: string,
-    data: T
-}
 /**
  * 判断注册的用户是否以及存在
  * @param loginId string
  * @returns 
  */
-export function isUserAlready(loginId: string): Promise<userRes<boolean>> {
+export function isUserAlready(loginId: string): Promise<IResponse<boolean>> {
     return request({
         url: `/api/user/userIsExist/${loginId}`,
         method: 'get'
@@ -54,7 +41,7 @@ export type userFormInfoReq = {
  * @param userRegisterInfo userFormInfoReq
  * @returns 
  */
-export function register(userRegisterInfo: userFormInfoReq): Promise<userRes<userInfoData>> {
+export function register(userRegisterInfo: userFormInfoReq): Promise<IResponse<IUserCommonData>> {
     return request({
         url: '/api/user',
         method: 'post',
@@ -67,7 +54,7 @@ export function register(userRegisterInfo: userFormInfoReq): Promise<userRes<use
  * @param userLoginInfo userFormInfoReq
  * @returns 
  */
-export function login(userLoginInfo: userFormInfoReq): Promise<userRes<userInfoData>> {
+export function login(userLoginInfo: userFormInfoReq): Promise<IResponse<IUserCommonData>> {
     return request({
         url: '/api/user/login',
         method: 'post',
@@ -80,7 +67,7 @@ export function login(userLoginInfo: userFormInfoReq): Promise<userRes<userInfoD
  * @param id string
  * @returns 
  */
-export function getUserInfo(id: string): Promise<userRes<userInfoData>> {
+export function getUserInfo(id: string): Promise<IResponse<IUserInfo>> {
     return request({
         url: `/api/user/${id}`,
         method: 'get'
@@ -91,7 +78,7 @@ export function getUserInfo(id: string): Promise<userRes<userInfoData>> {
  * 获取当前登录用户信息
  * @returns 
  */
-export function getUserInfoToken(): Promise<userInfoData> {
+export function getUserInfoToken(): Promise<IUserCommonData> {
     return request({
         url: '/api/user/whoami',
         method: 'get'
@@ -104,7 +91,7 @@ export function getUserInfoToken(): Promise<userInfoData> {
 /**
  * 获取积分前十的用户
  */
-export function getTopUser(): Promise<userRes<topUserInfo[]>> {
+export function getTopUser(): Promise<IResponse<IUserInfo[]>> {
     return request({
         url: '/api/user/pointsrank',
         method: 'get'

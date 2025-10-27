@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userSlice from "./userSlice";
 import typeSlice from "./typeSlice";
+import storageSlice from "./storageSlice";
 
 const store = configureStore({
     reducer: {
         user: userSlice,
-        type: typeSlice
+        type: typeSlice,
+        storage: storageSlice
     },
 });
 

@@ -10,9 +10,9 @@ export default function NavHeader(props: { openModal: () => void }) {
         { value: 'answer', label: '问答' },
         { value: 'book', label: '书籍' },
         // { value: 'interview', label: '面试题' },
-    ]
+    ];
 
-    const [searchText, setSearchText] = useState('')
+    const [searchText, setSearchText] = useState<string>('');
 
     return (
         <div className="headerContainer">
@@ -28,7 +28,7 @@ export default function NavHeader(props: { openModal: () => void }) {
             <div className="searchContainer">
                 <Space.Compact style={{ width: '100%' }}>
                     <Select defaultValue="answer" size="large" options={options} />
-                    <Input.Search value={searchText} placeholder="请输入要搜索的内容" size="large" allowClear onSearch={(value) => setSearchText(value)} enterButton="搜索" />
+                    <Input.Search value={searchText} placeholder="请输入要搜索的内容" onChange={(e) => setSearchText(e.target.value)} size="large" allowClear enterButton="搜索" />
                 </Space.Compact>
             </div>
             <div className="loginBtnContainer">

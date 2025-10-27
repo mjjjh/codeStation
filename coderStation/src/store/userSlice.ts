@@ -4,7 +4,11 @@ export const userSlice = createSlice({
     name: "user",
     initialState: {
         isLogin: false,
-        userInfo: {}
+        userInfo: {
+            _id: '',
+            avatar: '',
+            nickname: ''
+        }
     },
     reducers: {
         initialUserInfo: (state, { payload }) => {
@@ -15,7 +19,11 @@ export const userSlice = createSlice({
         },
         clearUserInfo: (state) => {
             state.isLogin = false;
-            state.userInfo = {};
+            state.userInfo = {
+                _id: '',
+                avatar: '',
+                nickname: ''
+            };
         }
     }
 });

@@ -1,3 +1,14 @@
+export interface IUserCommonData {
+    data: {
+        enabled: boolean,
+        loginId: string,
+        _id: string,
+    },
+    token: string
+}
+
+
+
 export interface IIssueReq {
     current: number;
     pageSize: number;
@@ -6,8 +17,8 @@ export interface IIssueReq {
     issueStatus: boolean;
 }
 
-export interface IIssueReqDate {
-    id: string, // mongodb 自动生成的 id
+export interface IIssueResDate {
+    _id: string, // mongodb 自动生成的 id
     issueTitle: string, // 问题标题
     issueContent: string, // 问题描述
     issuePic: string, // 问题图片
@@ -23,7 +34,7 @@ export interface IIssueReqDate {
 export interface IIssueRes {
     count: number;
     currentPage: number;
-    data: IIssueReqDate[];
+    data: IIssueResDate[];
     eachPage: number;
     totalPage: number;
 }
@@ -34,7 +45,7 @@ export interface ITypeRes {
 }
 
 
-export type topUserInfo = {
+export type IUserInfo = {
     avatar: string;
     enabled: boolean;
     intro: string;
@@ -48,4 +59,70 @@ export type topUserInfo = {
     registerDate: string;
     wechat: string;
     _id: string;
+}
+
+
+
+export type IIssueAddReq = {
+    issueTitle: string;
+    issueContent: string;
+    typeId: string;
+    userId: string
+}
+
+
+/**
+ * 问题详情响应
+ */
+export interface IIssueDetailRes {
+    commentNumber: string,
+    issueContent: string,
+    issueDate: string,
+    issueStatus: string,
+    issueTitle: string,
+    nickname: string,
+    scanNumber: string,
+    typeId: string,
+    userId: string,
+    _id: string,
+}
+
+
+
+
+export interface ICommentReq {
+    current: number;
+    pageSize: number;
+}
+
+
+export interface ICommentRes {
+    currentPage: number,
+    eachPage: number,
+    count: number,
+    totalPage: number,
+    data: ICommentResData[],
+}
+
+export interface ICommentResData {
+    _id: string,
+    userId: string,
+    issueId: string,
+    bookId: string,
+    typeId: string,
+    commentContent: string, // 对应评论
+    commentDate: string, // 评论日期
+    commentType: string, // 评论类型
+    nickname: string
+    avatar: string
+}
+
+
+export interface IAddCommentReq {
+    userId: string,
+    issueId?: string,
+    bookId?: string,
+    typeId: string,
+    commentContent: string,
+    commentType: number,
 }

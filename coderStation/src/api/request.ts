@@ -7,8 +7,8 @@ const request = axios.create({
 
 // // 存储当前请求的控制器，用于取消重复请求
 // const requestMap = new Map<string, AbortController>();
-let preTime: number | null = null;
-let preUrl = "";
+// let preTime: number | null = null;
+// let preUrl = "";
 request.interceptors.request.use((config) => {
 
     // // 生成请求唯一标识（这里用 url 简单判断，复杂场景可加上 method、params 等）
@@ -26,9 +26,9 @@ request.interceptors.request.use((config) => {
     // config.signal = controller.signal; // 将信号绑定到当前请求
     // requestMap.set(requestKey, controller);
 
-    if (preTime && preUrl === config.url && Date.now() - (+preTime) < 200) {
-        return Promise.reject(preUrl + '请求过于频繁');
-    }
+    // if (preTime && preUrl === config.url && Date.now() - (+preTime) < 200) {
+    //     return Promise.reject(preUrl + '请求过于频繁');
+    // }
 
     // 请求处理
     const token = localStorage.getItem('userToken');
@@ -36,8 +36,8 @@ request.interceptors.request.use((config) => {
         config.headers.Authorization = `Bearer ${token}`
     }
 
-    preTime = Date.now();
-    preUrl = config.url || '';
+    // preTime = Date.now();
+    // preUrl = config.url || '';
     return config;
 }, (err: any) => {
     console.log(err);

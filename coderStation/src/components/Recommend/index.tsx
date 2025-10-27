@@ -6,10 +6,9 @@ import style from "./style.module.css"
 
 const Recommend: React.FC = () => {
     return (
-        <Card title="推荐内容" style={{ width: 300 }}>
+        <Card title="推荐内容" style={{ maxWidth: '80%', marginTop: 30 }}>
             <Carousel autoplay>
                 <div>
-                    {/* 随机图片 */}
                     <img src="https://img.yzcdn.com/vant/cat.jpeg" className={style.contentStyle} />
                 </div>
                 <div>

@@ -1,3 +1,5 @@
+import { ITypeRes } from "@/types/api";
+
 /**
  * 时间格式化
  */
@@ -17,12 +19,28 @@ export function formatTime(time: string) {
     if (new Date().getTime() - date.getTime() > 24 * 60 * 60 * 1000) {
         return `${Y}-${M}-${D}`;
     }
-    // 一周内显示星期
-    if (new Date().getTime() - date.getTime() < 7 * 24 * 60 * 60 * 1000) {
-        const week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-        return week[date.getDay()];
-    }
-    // 今天内只显示时间
-    return `${h}:${m}:${s}`;
 
+    if (new Date().getTime() - date.getTime() < 24 * 60 * 60 * 1000) {
+        return `${h}:${m}:${s}`;
+    }
+
+    // 一周内显示星期
+    const week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    return `${Y}-${M}-${D} ${week[date.getDay()]}`;
+
+
+
+}
+
+
+/**
+ * 选择框的数据格式化
+ */
+export function formatSelectData(data: ITypeRes[]) {
+    return data.map((item: any) => {
+        return {
+            label: item.typeName,
+            value: item._id
+        }
+    })
 }
