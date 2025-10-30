@@ -15,10 +15,11 @@ import style from "./style.module.css"
 
 interface IProps {
     commentType: number
-    issueId: string
+    issueId?: string
+    bookId?: string
     typeId: string
 }
-const Discuss: React.FC<IProps> = ({ commentType, issueId }) => {
+const Discuss: React.FC<IProps> = ({ commentType, issueId, bookId, typeId }) => {
 
     const editorRef = useRef<any>('');
 
@@ -36,8 +37,9 @@ const Discuss: React.FC<IProps> = ({ commentType, issueId }) => {
     // 获取数据
     const getData = async (params: { page: number, pageSize: number } = { page: 1, pageSize: 10 }) => {
         if (commentType === 1) {
+            if (!issueId) return
             // 问答的评论
-            const res = await commentListApi(issueId, {
+            const res = await commentListApi(commentType, issueId, {
                 current: params.page,
                 pageSize: params.pageSize
             });
@@ -49,13 +51,25 @@ const Discuss: React.FC<IProps> = ({ commentType, issueId }) => {
             });
         } else if (commentType === 2) {
             // 书籍的评论
+            if (!bookId) return
+            const res = await commentListApi(commentType, bookId, {
+                current: params.page,
+                pageSize: params.pageSize
+            });
+            setCommentList(res.data.data);
+            setPageInfo({
+                current: res.data.currentPage,
+                pageSize: res.data.eachPage,
+                count: res.data.count
+            });
         }
-
     }
+
     useEffect(() => {
-        if (!issueId) return
+        if (commentType === 1 && !issueId) return
+        if (commentType === 2 && !bookId) return
         getData();
-    }, [issueId])
+    }, [commentType, issueId, bookId]);
 
     const avatar = isLogin ? { src: userInfo?.avatar } : { icon: <UserOutlined /> };
 
@@ -79,7 +93,8 @@ const Discuss: React.FC<IProps> = ({ commentType, issueId }) => {
             userId: userInfo._id,
             issueId: issueId,
             commentContent: commentContent,
-            typeId: issueId,
+            typeId: typeId,
+            bookId: bookId,
             commentType: commentType
         }).then((res) => {
             if (!res.code) {

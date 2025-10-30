@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface Part {
-    type: 'text' | 'image' | 'code';
-    value: string;
+    type: 'text' | 'image' | 'code' | 'origin';
+    value: string | React.ReactNode;
     alt?: string;
+    tag?: React.ReactNode;
     language?: string;
 }
 
@@ -48,6 +49,12 @@ const useParseHTML = (html: string) => {
                     if (codeContent) {
                         parts.push({ type: 'code', value: codeContent, language });
                     }
+                } else if (tagName === 'br') {
+                    parts.push({ type: 'origin', tag: React.createElement('br'), value: '\n' });
+                } else if (tagName === 'hr') {
+                    parts.push({ type: 'origin', tag: React.createElement('hr'), value: '\n' });
+                } else if (tagName === 'strong') {
+                    parts.push({ type: 'origin', tag: React.createElement('strong', null, node.textContent || ''), value: node.textContent || '' });
                 } else {
                     // 其他元素（如 <p>）：递归处理子节点
                     Array.from(node.childNodes).forEach(traverseNodes);

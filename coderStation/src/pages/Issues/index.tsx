@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Pagination } from 'antd';
 import { getIssuesApi } from '@/api/issue';
-import { IIssueResDate } from '@/types/api';
+import { IIssueResData } from '@/types/api';
 import PageHeader from '@/components/PageHeader';
 import IssueItem from './components/IssueItem';
 import AddButton from '@/pages/Issues/components/AddButton';
@@ -12,7 +12,7 @@ import { storeIssuePage } from '@/store/storageSlice';
 import { RootState, AppDispatch } from '@/store';
 import style from './style.module.css'
 export const Issues: React.FC = () => {
-    const [issuesList, setIssuesList] = useState<IIssueResDate[]>([]);
+    const [issuesList, setIssuesList] = useState<IIssueResData[]>([]);
     const issuePage = useSelector((state: RootState) => state.storage.issuePage);
     const dispatch = useDispatch<AppDispatch>();
     const [pageInfo, setPageInfo] = useState(issuePage);
@@ -36,7 +36,7 @@ export const Issues: React.FC = () => {
         getData(pageInfo);
     }, [])
 
-    const issuesListRender = issuesList.map((issue: IIssueResDate, index) => (<IssueItem key={`issue-${index}-${issue._id}`} issue={issue}></IssueItem>))
+    const issuesListRender = issuesList.map((issue: IIssueResData, index) => (<IssueItem key={`issue-${index}-${issue._id}`} issue={issue}></IssueItem>))
 
 
     return (

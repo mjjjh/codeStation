@@ -1,3 +1,4 @@
+/**** user ****/
 export interface IUserCommonData {
     data: {
         enabled: boolean,
@@ -8,7 +9,7 @@ export interface IUserCommonData {
 }
 
 
-
+/**** issue ****/
 export interface IIssueReq {
     current: number;
     pageSize: number;
@@ -17,7 +18,7 @@ export interface IIssueReq {
     issueStatus: boolean;
 }
 
-export interface IIssueResDate {
+export interface IIssueResData {
     _id: string, // mongodb 自动生成的 id
     issueTitle: string, // 问题标题
     issueContent: string, // 问题描述
@@ -34,7 +35,7 @@ export interface IIssueResDate {
 export interface IIssueRes {
     count: number;
     currentPage: number;
-    data: IIssueResDate[];
+    data: IIssueResData[];
     eachPage: number;
     totalPage: number;
 }
@@ -88,8 +89,7 @@ export interface IIssueDetailRes {
 }
 
 
-
-
+/**** comment ****/
 export interface ICommentReq {
     current: number;
     pageSize: number;
@@ -125,4 +125,37 @@ export interface IAddCommentReq {
     typeId: string,
     commentContent: string,
     commentType: number,
+}
+
+
+
+/*** book ***/
+
+export interface IBookReq {
+    current: number;
+    pageSize: number;
+    bookTitle?: string;
+    typeId?: string;
+}
+
+
+export interface IBookResData {
+    _id: string;
+    bookTitle: string, // 书籍标题
+    bookPic: string, // 书籍图片
+    downloadLink: string, // 下载链接
+    bookIntro: string, // 书籍介绍
+    scanNumber: number, // 浏览数
+    commentNumber: number, // 评论数
+    onShelfDate: string, // 上架日期
+    requirePoints: number, // 下砸所需积分
+    typeId: string
+}
+
+export interface IBookRes {
+    count: number;
+    currentPage: number;
+    data: IBookResData[];
+    eachPage: number;
+    totalPage: number;
 }

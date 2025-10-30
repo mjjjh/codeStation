@@ -36,8 +36,6 @@ function App() {
       const token = localStorage.getItem('userToken');
       if (!token) return;
       const res = await getUserInfoToken();
-      console.log(res, ';');
-
       if (!res.data) {
         // token过期
         localStorage.removeItem('userToken');
