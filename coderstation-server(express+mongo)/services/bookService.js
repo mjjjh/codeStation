@@ -24,7 +24,11 @@ module.exports.findBookByPageService = async function (queryObj) {
  * 根据 id 获取其中一本书籍信息
  */
 module.exports.findBookByIdService = async function (id) {
-  return await findBookByIdDao(id);
+  const book = await findBookByIdDao(id);
+    // 浏览数加一
+  book.scanNumber += 1;
+  await book.save();
+  return book;
 };
 
 /**
