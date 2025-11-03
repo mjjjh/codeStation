@@ -36,7 +36,6 @@ export const Book: React.FC = () => {
             <PageHeader title="最新资源"></PageHeader>
             <div className={style.bookContainer}>
                 {bookListRender}
-
             </div>
             <div className="paginationContainer">
                 <Pagination size="small" current={pageInfo.current} pageSize={pageInfo.pageSize} onChange={(page, pageSize) => { getData({ current: page, pageSize, count: pageInfo.count }) }} total={pageInfo.count} showSizeChanger showQuickJumper />

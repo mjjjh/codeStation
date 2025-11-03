@@ -97,3 +97,16 @@ export function getTopUser(): Promise<IResponse<IUserInfo[]>> {
         method: 'get'
     })
 }
+
+/**
+ * 根据id修改用户
+ */
+export function updateUser(id: string, userFormInfoReq: {
+    [K in keyof IUserInfo]?: IUserInfo[K];
+}): Promise<IResponse<IUserInfo>> {
+    return request({
+        url: `/api/user/${id}`,
+        method: 'patch',
+        data: userFormInfoReq
+    })
+}

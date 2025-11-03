@@ -8,6 +8,7 @@
 
 .leftSide {
     width: 25%;
+    min-width: 210px;
     text-align: center;
 }
 

@@ -48,17 +48,17 @@ export interface ITypeRes {
 
 export type IUserInfo = {
     avatar: string;
-    enabled: boolean;
-    intro: string;
-    lastLoginDate: string;
-    loginId: string;
-    loginPwd: string;
-    mail: string;
+    enabled?: boolean;
+    intro?: string;
+    lastLoginDate?: string;
+    loginId?: string;
+    loginPwd?: string;
+    mail?: string;
     nickname: string;
     points: number;
-    qq: string;
-    registerDate: string;
-    wechat: string;
+    qq?: string;
+    registerDate?: string;
+    wechat?: string;
     _id: string;
 }
 

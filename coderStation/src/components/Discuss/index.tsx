@@ -2,8 +2,9 @@ import React, { useRef, useState, useEffect } from "react";
 import { Button, Pagination, message } from "antd";
 import { UserOutlined } from '@ant-design/icons';
 import { Editor } from '@toast-ui/react-editor';
-import { useSelector } from "react-redux";
-import { RootState } from "@/store";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUserInfoAsync } from "@/store/userSlice";
+import { RootState, AppDispatch } from "@/store";
 import '@toast-ui/editor/dist/toastui-editor.css';
 import Comment from "../Comment";
 import HtmlRenderer from "../HtmlRenderer";
@@ -33,6 +34,8 @@ const Discuss: React.FC<IProps> = ({ commentType, issueId, bookId, typeId }) => 
 
     const userInfo = useSelector((state: RootState) => state.user.userInfo);
     const isLogin = useSelector((state: RootState) => state.user.isLogin);
+
+    const dispatch = useDispatch<AppDispatch>()
 
     // 获取数据
     const getData = async (params: { page: number, pageSize: number } = { page: 1, pageSize: 10 }) => {
@@ -101,6 +104,12 @@ const Discuss: React.FC<IProps> = ({ commentType, issueId, bookId, typeId }) => 
                 message.success('评论成功');
                 editorRef.current.getInstance().setHTML('');
             }
+            dispatch(updateUserInfoAsync({
+                userid: userInfo._id,
+                newInfo: {
+                    points: userInfo.points + 1
+                }
+            }));
             getData();
         }).catch((err) => {
             console.log(err);
@@ -125,11 +134,16 @@ const Discuss: React.FC<IProps> = ({ commentType, issueId, bookId, typeId }) => 
                 </>
             )
             } />
+
             {/* 评论列表 */}
             {commentListRender}
-
-            {/* 分页 */}
-            <Pagination className={style.paginationContainer} size="small" current={pageInfo.current} pageSize={pageInfo.pageSize} onChange={(page, pageSize) => { getData({ page, pageSize }) }} total={pageInfo.count} showSizeChanger showQuickJumper />
+            {commentList.length === 0 ? <div style={{
+                fontWeight: '200',
+                textAlign: 'center',
+                margin: "50px"
+            }}>暂无评论</div> :
+                <Pagination className={style.paginationContainer} size="small" current={pageInfo.current} pageSize={pageInfo.pageSize} onChange={(page, pageSize) => { getData({ page, pageSize }) }} total={pageInfo.count} showSizeChanger showQuickJumper />
+            }
         </div>
     )
 };
