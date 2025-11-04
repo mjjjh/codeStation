@@ -15,3 +15,9 @@
     margin-top: 10px;
     font-weight: 200;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0
+}

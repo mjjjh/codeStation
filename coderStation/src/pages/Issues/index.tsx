@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Pagination } from 'antd';
+import { Pagination, Empty } from 'antd';
 import { getIssuesApi } from '@/api/issue';
-import { IIssueResData } from '@/types/api';
+import { IIssueReq, IIssueResData } from '@/types/api';
 import PageHeader from '@/components/PageHeader';
 import IssueItem from './components/IssueItem';
 import AddButton from '@/pages/Issues/components/AddButton';
@@ -17,17 +17,17 @@ export const Issues: React.FC = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [pageInfo, setPageInfo] = useState(issuePage);
     // 获取数据
-    const getData = async (params: { current: number, pageSize: number, count: number }) => {
+    const getData = async (params: IIssueReq) => {
         const res = await getIssuesApi({
-            current: params.current,
-            pageSize: params.pageSize,
+            ...params,
             issueStatus: true
         });
         setIssuesList(res.data.data);
         const pageInfo = {
+            ...params,
             current: res.data.currentPage,
             pageSize: res.data.eachPage,
-            count: res.data.count
+            totalPage: res.data.count
         }
         setPageInfo(pageInfo);
         dispatch(storeIssuePage(pageInfo));
@@ -36,18 +36,25 @@ export const Issues: React.FC = () => {
         getData(pageInfo);
     }, [])
 
-    const issuesListRender = issuesList.map((issue: IIssueResData, index) => (<IssueItem key={`issue-${index}-${issue._id}`} issue={issue}></IssueItem>))
+    const serchByTag = (tagId: string) => {
+        getData({ current: 1, pageSize: pageInfo.pageSize, totalPage: pageInfo.totalPage, typeId: tagId });
+    }
 
+    const issuesListRender = issuesList.map((issue: IIssueResData, index) => (<IssueItem key={`issue-${index}-${issue._id}`} issue={issue}></IssueItem>))
 
     return (
         <div>
-            <PageHeader title="问题列表"></PageHeader>
+            <PageHeader title="问题列表" tagClick={serchByTag}></PageHeader>
             <div className={style.issueContainer}>
                 <div className={style.leftSide}>
-                    {issuesListRender}
-                    <div className="paginationContainer">
-                        <Pagination size="small" current={pageInfo.current} pageSize={pageInfo.pageSize} onChange={(page, pageSize) => { getData({ current: page, pageSize, count: pageInfo.count }) }} total={pageInfo.count} showSizeChanger showQuickJumper />
-                    </div>
+                    {
+                        issuesList.length === 0 ? <Empty></Empty>
+                            : <>
+                                {issuesListRender}
+                                <div className="paginationContainer">
+                                    <Pagination size="small" current={pageInfo.current} pageSize={pageInfo.pageSize} onChange={(page, pageSize) => { getData({ current: page, pageSize, totalPage: pageInfo.totalPage }) }} total={pageInfo.totalPage} showSizeChanger showQuickJumper />
+                                </div>
+                            </>}
                 </div>
                 <div className={style.rightSide}>
                     <AddButton></AddButton>
@@ -55,7 +62,7 @@ export const Issues: React.FC = () => {
                     <ScoreRank></ScoreRank>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

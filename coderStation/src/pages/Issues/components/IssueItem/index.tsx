@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import style from './style.module.css'
-import { IIssueResDate } from "@/types/api";
+import { IIssueResData } from "@/types/api";
 import { formatTime } from "@/utils/tools";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,7 @@ import { getTypeList } from "@/store/typeSlice";
 import { RootState, AppDispatch } from "@/store";
 import { Tag } from "antd";
 interface IIsueItemProps {
-    issue: IIssueResDate
+    issue: IIssueResData
 }
 
 const IssueItem: React.FC<IIsueItemProps> = ({ issue }: IIsueItemProps) => {

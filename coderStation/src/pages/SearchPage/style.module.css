@@ -1,6 +1,4 @@
-/* 问答页面样式 */
-
-.issueContainer {
+.searchPageContainer {
     width: 90%;
     /* height: 3000px; */
     margin: 0 auto;
@@ -17,6 +15,14 @@
     /* outline: 1px solid #ccc; */
 }
 
+.book {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    align-items: start;
+    margin-top: 10px;
+}
+
 .rightSide {
     width: 28%;
     height: 100%;
@@ -24,7 +30,7 @@
     /* outline: 1px solid #ccc; */
 }
 
-.noIssue {
+.noResult {
     text-align: center;
     font-weight: 200;
     font-size: 36px;

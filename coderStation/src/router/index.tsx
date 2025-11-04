@@ -5,6 +5,7 @@ import Books from "../pages/Book";
 import BookDetail from "../pages/BookDetail";
 import Interviews from "../pages/Inerview";
 import AddIssue from "@/pages/AddIssue";
+import SearchPage from "@/pages/SearchPage";
 import { useSelector } from "react-redux";
 
 export default function RouterConfig() {
@@ -16,6 +17,7 @@ export default function RouterConfig() {
             <Route path="/issue/detail/:id" element={<IssueDetail />} />
             <Route path="/books" element={<Books />} />
             <Route path="/books/detail/:id" element={<BookDetail />} />
+            <Route path="/search" element={<SearchPage />} />
 
             <Route path="/interviews" element={<Interviews />} />
             <Route path="/addIssue" element={userInfo._id ? <AddIssue /> : <Navigate replace to="/" />} />

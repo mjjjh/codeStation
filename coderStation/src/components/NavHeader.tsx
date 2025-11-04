@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom"
 
 import { Input, Select, Space } from 'antd';
 
+import { useNavigate } from "react-router-dom";
+
 import LoginNav from "./LoginNav";
 
 export default function NavHeader(props: { openModal: () => void }) {
@@ -11,8 +13,25 @@ export default function NavHeader(props: { openModal: () => void }) {
         { value: 'book', label: '书籍' },
         // { value: 'interview', label: '面试题' },
     ];
+    const navigate = useNavigate();
+    const [searchCategory, setSearchCategory] = useState('answer');
 
-    const [searchText, setSearchText] = useState<string>('');
+    const onChange = (value: string) => {
+        setSearchCategory(value);
+    }
+
+    const onSearch = (value: string) => {
+        if (!value) {
+            navigate(`/`);
+            return;
+        }
+        navigate(`/search`, {
+            state: {
+                searchCategory,
+                searchValue: value
+            }
+        });
+    }
 
     return (
         <div className="headerContainer">
@@ -27,8 +46,8 @@ export default function NavHeader(props: { openModal: () => void }) {
             </nav>
             <div className="searchContainer">
                 <Space.Compact style={{ width: '100%' }}>
-                    <Select defaultValue="answer" size="large" options={options} />
-                    <Input.Search value={searchText} placeholder="请输入要搜索的内容" onChange={(e) => setSearchText(e.target.value)} size="large" allowClear enterButton="搜索" />
+                    <Select defaultValue="answer" size="large" options={options} onChange={onChange} />
+                    <Input.Search placeholder="请输入要搜索的内容" size="large" allowClear enterButton="搜索" onSearch={onSearch} />
                 </Space.Compact>
             </div>
             <div className="loginBtnContainer">

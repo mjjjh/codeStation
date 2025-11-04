@@ -8,6 +8,7 @@ import { Tag } from "antd";
 interface IPageHeaderProps {
     title: string;
     showTag?: boolean
+    tagClick?: (e: any) => void
 }
 
 const PageHeader: React.FC<IPageHeaderProps> = (props: IPageHeaderProps) => {
@@ -23,12 +24,21 @@ const PageHeader: React.FC<IPageHeaderProps> = (props: IPageHeaderProps) => {
         }
     }, [])
 
-    const typeTags = typeList.map((item, index) => <Tag key={item._id} color={colorArr[index % colorArr.length]}>{item?.typeName}</Tag>
-    )
+    const tagClick = (e: any) => {
+        const tagName = e.target?.textContent
+        const typeId = typeList.find(item => item.typeName === tagName)?._id
+        props.tagClick && props.tagClick(typeId)
+    }
 
+    const typeTags = [
+        <Tag key={'all'} color="magenta" style={{ cursor: 'pointer' }}>全部</Tag>,
+        ...typeList.map((item, index) => <Tag key={item._id} color={colorArr[index % colorArr.length]} style={{ cursor: 'pointer' }}>{item?.typeName}</Tag>
+        )]
     return (<div className={style.row}>
         <div className={style.pageHeader}>{title}</div>
-        {showTag && typeTags}
+        <div onClick={tagClick}>
+            {showTag && typeTags}
+        </div>
 
     </div>)
 };

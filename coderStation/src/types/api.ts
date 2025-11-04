@@ -15,7 +15,8 @@ export interface IIssueReq {
     pageSize: number;
     issueTitle?: string;
     typeId?: string;
-    issueStatus: boolean;
+    issueStatus?: boolean;
+    totalPage?: number
 }
 
 export interface IIssueResData {

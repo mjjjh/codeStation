@@ -5,7 +5,16 @@ interface IInitialState {
     issuePage: {
         current: number,
         pageSize: number,
-        count: number
+        totalPage: number,
+        typeId?: string
+    },
+
+    // book页状态
+    bookPage: {
+        current: number,
+        pageSize: number,
+        totalPage: number,
+        typeId?: string
     }
 }
 
@@ -14,8 +23,14 @@ const initialState: IInitialState = {
     issuePage: {
         current: 1,
         pageSize: 10,
-        count: 0
-    }
+        totalPage: 0
+    },
+    bookPage: {
+        current: 1,
+        pageSize: 10,
+        totalPage: 0
+    },
+
 }
 
 export const storageSlice = createSlice({
@@ -24,9 +39,12 @@ export const storageSlice = createSlice({
     reducers: {
         storeIssuePage: (state, { payload }) => {
             state.issuePage = payload
+        },
+        storeBookPage: (state, { payload }) => {
+            state.bookPage = payload
         }
     },
 })
 
-export const { storeIssuePage } = storageSlice.actions
+export const { storeIssuePage, storeBookPage } = storageSlice.actions
 export default storageSlice.reducer

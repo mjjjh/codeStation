@@ -10,7 +10,7 @@ const AddButton: React.FC = () => {
 
     return (
         <div >
-            {!isLogin && <Button        
+            {isLogin && <Button
                 type="primary"
                 className={style.addButton}
                 onClick={() => navigate("/addIssue")}
