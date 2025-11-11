@@ -3,7 +3,7 @@ import Issues from "../pages/Issues";
 import IssueDetail from "@/pages/IssueDetail";
 import Books from "../pages/Book";
 import BookDetail from "../pages/BookDetail";
-import Interviews from "../pages/Inerview";
+import Interviews from "../pages/Interview";
 import AddIssue from "@/pages/AddIssue";
 import SearchPage from "@/pages/SearchPage";
 import { useSelector } from "react-redux";

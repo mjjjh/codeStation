@@ -23,6 +23,9 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+      // any允许
+      '@typescript-eslint/no-explicit-any': 'off',
+
     },
   },
 )

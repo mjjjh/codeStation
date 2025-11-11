@@ -51,7 +51,7 @@ export const Issues: React.FC = () => {
                         issuesList.length === 0 ? <Empty></Empty>
                             : <>
                                 {issuesListRender}
-                                <div className="paginationContainer">
+                                <div className={style.pagination}>
                                     <Pagination size="small" current={pageInfo.current} pageSize={pageInfo.pageSize} onChange={(page, pageSize) => { getData({ current: page, pageSize, totalPage: pageInfo.totalPage }) }} total={pageInfo.totalPage} showSizeChanger showQuickJumper />
                                 </div>
                             </>}

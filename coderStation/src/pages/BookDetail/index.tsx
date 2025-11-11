@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { IBookResData, IUserInfo } from "@/types/api";
+import { IBookResData } from "@/types/api";
 import { getBookDetailApi } from "@/api/book";
 import { Image } from "antd";
 import Discuss from "@/components/Discuss";

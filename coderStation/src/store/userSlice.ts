@@ -11,7 +11,7 @@ export const updateUserInfoAsync = createAsyncThunk('user/updateUserInfo', async
     return payload.newInfo;
 })
 
-let userInfo: IUserInfo = {
+const userInfo: IUserInfo = {
     _id: '',
     avatar: '',
     nickname: '',

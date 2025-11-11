@@ -19,9 +19,6 @@ import { formatSelectData } from '@/utils/tools'
 
 import { addIssueApi } from '@/api/issue'
 
-interface IProps {
-
-}
 
 interface IFormParams {
     title: string,
@@ -30,7 +27,7 @@ interface IFormParams {
 }
 type formKey = keyof IFormParams
 
-const AddIssue: React.FC<IProps> = () => {
+const AddIssue: React.FC = () => {
 
     const [form] = Form.useForm();
     const [formParams, setFormParams] = useState<IFormParams>({

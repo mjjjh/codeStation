@@ -78,7 +78,7 @@ const Discuss: React.FC<IProps> = ({ commentType, issueId, bookId, typeId }) => 
 
     const commentListRender = commentList.map((item) => {
         return (
-            <Comment key={item._id} avatar={avatar} name={item.nickname} time={item.commentDate} rightSide={(
+            <Comment key={item._id} avatar={item.avatar} name={item.nickname} time={item.commentDate} rightSide={(
                 <HtmlRenderer expandable={true} html={item.commentContent} />
             )} />
         )

@@ -22,10 +22,11 @@
     color: #fff;
     padding: 10px;
     border-radius: 10px;
+    overflow-y: auto;
 }
 
 .leftSide .toastui-editor-main pre {
-    color: #000;
+    color: #ffffff;
 }
 
 .leftSide table {

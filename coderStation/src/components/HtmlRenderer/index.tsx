@@ -1,7 +1,8 @@
 // components/HtmlRenderer.tsx
 import React, { useState } from 'react';
 import { Image, Typography } from 'antd';
-import useParseHTML from '@/hooks/useParseHTML';
+import parse from 'html-react-parser';
+import { HTMLReactParserOptions } from 'html-react-parser';
 
 const { Paragraph } = Typography;
 
@@ -26,40 +27,20 @@ const HtmlRenderer: React.FC<HtmlRendererProps> = ({
     expandRows = 4
 }: HtmlRendererProps) => {
     // 调用Hook解析HTML
-    const parsedContent = useParseHTML(html);
+    // const parsedContent = useParseHTML(html);
     const [expanded, setExpanded] = useState(false);
-
-    const contentBody = (parsedContent.map((item, index) => (
-        <div key={index} style={{ marginBottom: '16px' }}>
-            {item.type === 'text' && (
-                // 文本内容：用Antd Paragraph渲染
-                <Paragraph key={index} style={textStyle}>{item.value}</Paragraph>
-            )}
-            {item.type === 'image' && (
-                // 图片内容：用Antd Image渲染（带放大预览）
-                <Image
-                    key={index}
-                    style={imageStyle}
-                    src={item.value as string}
-                    alt={item?.alt}
-                    preview={{
-                        toolbarRender: () => <div style={{ color: 'white' }}>点击空白处关闭</div>, // 自定义预览工具栏
-                    }}
-                />
-            )}
-            {item.type === 'code' && (
-                <div key={index} data-language={item.language}><pre><code>{item.value}
-                </code></pre></div>
-            )}
-            {
-                item.type === 'origin' && (
-                    <React.Fragment key={index}>
-                        {item.tag}
-                    </React.Fragment>
-                )
+    if (!html) return null
+    const options: HTMLReactParserOptions = {
+        replace: (domNode: any) => {
+            if (domNode?.name === 'img') {
+                return React.createElement(Image, { ...domNode.attribs, style: imageStyle });
+            } else if (domNode.type === 'text' && domNode.parent?.name !== 'code') {
+                return React.createElement(Paragraph, { style: textStyle }, domNode.data);
             }
-        </div>
-    )))
+            return domNode;
+        }
+    }
+    const contentBody = parse(html, options);
 
     return (
         <div style={containerStyle}>

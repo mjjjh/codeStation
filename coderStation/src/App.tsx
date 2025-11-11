@@ -2,7 +2,7 @@ import './css/App.css'
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Layout } from 'antd';
-import RouterConfig from './router';
+import RouterBefore from './router/RouterBefore';
 import { initialUserInfo, changeLoginStatus } from './store/userSlice';
 import PageFooter from './components/PageFooter';
 import NavHeader from './components/NavHeader';
@@ -59,7 +59,7 @@ function App() {
           <NavHeader openModal={showModal} />
         </Header>
         <Content className='content'>
-          <RouterConfig />
+          <RouterBefore />
         </Content>
         <Footer className='footer'>
           <PageFooter />

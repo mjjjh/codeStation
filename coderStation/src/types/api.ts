@@ -137,6 +137,7 @@ export interface IBookReq {
     pageSize: number;
     bookTitle?: string;
     typeId?: string;
+    totalPage?: number
 }
 
 
@@ -159,4 +160,12 @@ export interface IBookRes {
     data: IBookResData[];
     eachPage: number;
     totalPage: number;
+}
+
+
+
+/*** interView ***/
+export interface IInterViewTitleResData {
+    interviewTitle: string,
+    _id: string
 }

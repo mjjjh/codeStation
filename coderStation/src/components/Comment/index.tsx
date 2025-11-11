@@ -15,7 +15,7 @@ const Comment: React.FC<IProps> = ({ avatar, name, time, rightSide }) => {
     return (
         <>
             <div className={style.comment}>
-                <Avatar className={style.avatar} size={50} {...avatar} ></Avatar>
+                <Avatar className={style.avatar} size={50} src={avatar} ></Avatar>
                 <div className={style.content}>
                     <div className={style.questioner}>
                         <div className={style.user}>{name}</div>
