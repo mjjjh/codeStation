@@ -60,7 +60,24 @@ module.exports.findIssueCommentByIdService = async function (id, pager) {
  * 按照分页获取书籍模块某一本书对应的评论
  */
 module.exports.findBookCommentByIdService = async function (id, pager) {
-  return await findBookCommentByIdDao(id, pager);
+  const res = await findBookCommentByIdDao(id, pager);
+    // 如果存在且有userId，获取用户昵称
+    if (res) {
+      for(item in res.data) {
+        if (res.data[item].userId) {
+          try {
+            const userInfo = await findUserByIdDao(res.data[item].userId);
+            if (userInfo) {
+              res.data[item].nickname = userInfo.nickname;
+              res.data[item].avatar = userInfo.avatar;
+            }
+          } catch (error) {
+            console.error("获取用户昵称失败:", error);
+          }
+        }
+      }
+    }
+  return res;
 };
 
 /**
