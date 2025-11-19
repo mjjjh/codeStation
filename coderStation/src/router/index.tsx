@@ -6,6 +6,7 @@ import BookDetail from "../pages/BookDetail";
 import Interviews from "../pages/Interview";
 import AddIssue from "@/pages/AddIssue";
 import SearchPage from "@/pages/SearchPage";
+import Personal from "@/pages/Personal";
 import { useSelector } from "react-redux";
 
 export default function RouterConfig() {
@@ -21,6 +22,7 @@ export default function RouterConfig() {
 
             <Route path="/interviews" element={<Interviews />} />
             <Route path="/addIssue" element={userInfo._id ? <AddIssue /> : <Navigate replace to="/" />} />
+            <Route path="/personal" element={userInfo._id ? <Personal /> : <Navigate replace to="/" />} />
         </Routes>
     )
 }

@@ -9,7 +9,6 @@ const { Paragraph } = Typography;
 interface HtmlRendererProps {
     html: string; // 传入原始HTML字符串
     containerStyle?: React.CSSProperties; // 容器样式（可选）
-    textStyle?: React.CSSProperties; // 文本样式（可选）
     imageStyle?: React.CSSProperties; // 图片样式（可选）
     expandable?: boolean; // 是否可展开
     expandRows?: number; // 展开时的行数
@@ -21,7 +20,6 @@ interface HtmlRendererProps {
 const HtmlRenderer: React.FC<HtmlRendererProps> = ({
     html,
     containerStyle = { width: '100%', height: '100%' },
-    textStyle = { width: '100%', height: '100%' },
     imageStyle = { width: '100%', height: 'auto' },
     expandable = false,
     expandRows = 4
@@ -34,8 +32,6 @@ const HtmlRenderer: React.FC<HtmlRendererProps> = ({
         replace: (domNode: any) => {
             if (domNode?.name === 'img') {
                 return React.createElement(Image, { ...domNode.attribs, style: imageStyle });
-            } else if (domNode.type === 'text' && domNode.parent?.name !== 'code') {
-                return React.createElement(Paragraph, { style: textStyle }, domNode.data);
             }
             return domNode;
         }

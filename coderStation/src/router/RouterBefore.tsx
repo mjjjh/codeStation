@@ -7,7 +7,7 @@ const RouterBefore = () => {
     const router = routerBeforeConfig.find((item) => item.path === local);
     console.log(router);
 
-    if (router?.isNeedLogin) {
+    if (router?.isNeedLogin && !localStorage.getItem('userToken')) {
         return (
             <Alert
                 description='请先登录'

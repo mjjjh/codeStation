@@ -110,3 +110,14 @@ export function updateUser(id: string, userFormInfoReq: {
         data: userFormInfoReq
     })
 }
+
+/**
+ * 验证用户密码
+ */
+export function checkUserPwd(userId: string, loginPwd: string): Promise<IResponse<boolean>> {
+    return request({
+        url: `/api/user/passwordcheck`,
+        method: 'post',
+        data: { userId, loginPwd }
+    })
+}

@@ -60,6 +60,7 @@ export type IUserInfo = {
     qq?: string;
     registerDate?: string;
     wechat?: string;
+    github?: string;
     _id: string;
 }
 

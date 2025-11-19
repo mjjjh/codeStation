@@ -23,6 +23,9 @@ export default function LoginNav(props: { openModal: () => void }) {
             dispatch(clearUserInfo());
             navigate("/");
         }
+        if (item === "个人中心") {
+            navigate("/personal");
+        }
     }
 
     if (isLogin) {

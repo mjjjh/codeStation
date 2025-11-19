@@ -47,7 +47,7 @@ const IssueDetail: React.FC = () => {
                             <div>发布于：{formatTime(issueDetail?.issueDate as string)}</div>
                         </div>
                         <div className={style.content}>
-                            <HtmlRenderer html={issueDetail?.issueContent as string} textStyle={{ fontWeight: '400', fontSize: '18px' }} imageStyle={{
+                            <HtmlRenderer html={issueDetail?.issueContent as string} imageStyle={{
                                 width: '100%',
                                 aspectRatio: '1'
                             }}></HtmlRenderer>

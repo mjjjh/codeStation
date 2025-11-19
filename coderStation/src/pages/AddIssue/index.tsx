@@ -105,7 +105,7 @@ const AddIssue: React.FC = () => {
                         ref={editorRef}
                     />
                 </Form.Item>
-                <Form.Item>
+                <Form.Item wrapperCol={{ offset: 12 }}>
                     <Button type="primary" onClick={onSubmit}>
                         提交
                     </Button>

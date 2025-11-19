@@ -13,6 +13,7 @@ export const Book: React.FC = () => {
     const [bookList, setBookList] = useState<IBookResData[]>([]);
     const dispatch = useDispatch<AppDispatch>();
     const bookPage = useSelector((state: RootState) => state.storage.bookPage);
+
     const [pageInfo, setPageInfo] = useState(bookPage);
     // 获取数据
     const getData = async (params: IBookReq) => {

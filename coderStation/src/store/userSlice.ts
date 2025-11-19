@@ -3,10 +3,8 @@ import { updateUser } from "@/api/user";
 import { IUserInfoNew } from "@/types/store";
 import { IUserInfo } from "@/types/api";
 
-
+// 更新用户,返回更新后的用户
 export const updateUserInfoAsync = createAsyncThunk('user/updateUserInfo', async (payload: IUserInfoNew) => {
-    console.log(payload, '积分');
-
     await updateUser(payload.userid, payload.newInfo);
     return payload.newInfo;
 })
