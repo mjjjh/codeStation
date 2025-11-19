@@ -146,6 +146,11 @@ module.exports.addUserService = async function (newUserInfo) {
         newUserInfo.wechat = "";
       }
 
+      if(!newUserInfo.github){
+        // github
+        newUserInfo.github = "";
+      }
+
       return await addUserDao(newUserInfo);
     },
     function () {

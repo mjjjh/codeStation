@@ -36,6 +36,8 @@ router.post("/login", async function (req, res, next) {
   }
   try {
     const result = await loginService(req.body);
+    // 更新最近登录时间
+    await updateUserService(result.data._id, { lastLoginDate: Date.now() });
     // 对返回数据进行格式化
     res.send(formatResponse(0, "", result));
   } catch(err) {

@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema(
     mail: String, // 邮箱
     qq: String, // QQ
     wechat: String, // 微信号
+    github: String, // github
     intro: String, // 个人介绍
     registerDate: String, // 注册时间
     lastLoginDate: String, // 上次登录事件
