@@ -3,22 +3,26 @@ import { Card, Carousel } from 'antd';
 import RecommendItem from "../RecommendItem";
 
 import style from "./style.module.css"
+import hot1 from '/hot/hot1.png'
+import hot2 from '/hot/hot2.png'
+import hot3 from '/hot/hot3.png'
+import hot4 from '/hot/hot4.png'
 
 const Recommend: React.FC = () => {
     return (
         <Card title="推荐内容" style={{ maxWidth: '80%', marginTop: 30 }}>
-            <Carousel autoplay>
+            <Carousel autoplay arrows>
                 <div>
-                    <img src="https://img.yzcdn.com/vant/cat.jpeg" className={style.contentStyle} />
+                    <img src={hot1} className={style.contentStyle} />
                 </div>
                 <div>
-                    <img src="https://img.yzcdn.com/vant/cat.jpeg" className={style.contentStyle} />
+                    <img src={hot2} className={style.contentStyle} />
                 </div>
                 <div>
-                    <img src="https://img.yzcdn.com/vant/cat.jpeg" className={style.contentStyle} />
+                    <img src={hot3} className={style.contentStyle} />
                 </div>
                 <div>
-                    <img src="https://img.yzcdn.com/vant/cat.jpeg" className={style.contentStyle} />
+                    <img src={hot4} className={style.contentStyle} />
                 </div>
             </Carousel>
             <RecommendItem noId="1" title="利用使用 Cursor 修复 Ant Design Pro Components 的 issues" href="https://segmentfault.com/a/1190000047298448"></RecommendItem>

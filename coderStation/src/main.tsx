@@ -10,13 +10,13 @@ import { Provider } from 'react-redux';
 import store from './store/index.ts';
 
 createRoot(document.getElementById('root')!).render(
-  // <StrictMode>
-  <Provider store={store}>
-    <BrowserRouter>
-      <ConfigProvider locale={zhCN}>
-        <App />
-      </ConfigProvider>
-    </BrowserRouter>
-  </Provider>
-  // </StrictMode>,
+  <StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ConfigProvider locale={zhCN}>
+          <App />
+        </ConfigProvider>
+      </BrowserRouter>
+    </Provider>
+  </StrictMode>,
 )

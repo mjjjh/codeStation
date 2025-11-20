@@ -7,11 +7,14 @@ import style from '../css/LoginNav.module.css'
 import { clearUserInfo } from "../store/userSlice";
 import { useDispatch } from "react-redux";
 
+import useScreenSize from "../hooks/useScreenSize";
+
 export default function LoginNav(props: { openModal: () => void }) {
     const { isLogin, userInfo } = useSelector((state: any) => state.user)
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const isMobile = useScreenSize();
 
     let loginStatus = null;
 
@@ -46,12 +49,12 @@ export default function LoginNav(props: { openModal: () => void }) {
         )
     } else {
         loginStatus = (
-            <Button type="primary" size="large" onClick={props.openModal}>登录/注册</Button>
+            <Button type="primary" size="large" onClick={props.openModal}>{isMobile ? <UserOutlined /> : "登录/注册"}</Button>
         )
     }
 
     return (
-        <div>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
             {loginStatus}
         </div>
     )

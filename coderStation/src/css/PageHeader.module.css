@@ -6,9 +6,15 @@
 }
 
 .pageHeader {
-    font-size: 26px;
+    white-space: nowrap;
     margin: 20px;
     color: rgb(102, 102, 102);
     font-weight: 200;
-    margin-right: 100px;
+}
+
+.tagContainer {
+    display: flex;
+    flex:1;
+    overflow-y: auto;
+    margin-right: 20px;
 }

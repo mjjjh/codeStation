@@ -5,6 +5,8 @@ import { RootState, AppDispatch } from "@/store";
 import { getTypeList } from "@/store/typeSlice";
 import { Tag } from "antd";
 
+import useScreenSize from "../hooks/useScreenSize";
+
 interface IPageHeaderProps {
     title: string;
     showTag?: boolean
@@ -14,6 +16,8 @@ interface IPageHeaderProps {
 const PageHeader: React.FC<IPageHeaderProps> = (props: IPageHeaderProps) => {
     const dispatch = useDispatch<AppDispatch>()
     const { typeList } = useSelector((state: RootState) => state.type)
+    const isMobile = useScreenSize()
+
     const colorArr = ["#108ee9", "#2db7f5", "#f50", "green", "#87d068", "blue", "red", "purple"];
 
     const { title, showTag = true } = props
@@ -24,10 +28,12 @@ const PageHeader: React.FC<IPageHeaderProps> = (props: IPageHeaderProps) => {
         }
     }, [])
 
-    const tagClick = (e: any) => {
+    const tagClickhandler = (e: any) => {
         const tagName = e.target?.textContent
         const typeId = typeList.find(item => item.typeName === tagName)?._id
-        props.tagClick && props.tagClick(typeId)
+        if (props.tagClick) {
+            props.tagClick(typeId)
+        }
     }
 
     const typeTags = [
@@ -35,8 +41,8 @@ const PageHeader: React.FC<IPageHeaderProps> = (props: IPageHeaderProps) => {
         ...typeList.map((item, index) => <Tag key={item._id} color={colorArr[index % colorArr.length]} style={{ cursor: 'pointer' }}>{item?.typeName}</Tag>
         )]
     return (<div className={style.row}>
-        <div className={style.pageHeader}>{title}</div>
-        <div onClick={tagClick}>
+        <div className={style.pageHeader} style={{ fontSize: isMobile ? '16px' : '26px' }}>{title}</div>
+        <div className={style.tagContainer} onClick={tagClickhandler}>
             {showTag && typeTags}
         </div>
 

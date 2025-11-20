@@ -11,7 +11,7 @@ import SearchItem from './components/SearchItem';
 import { useLocation } from "react-router-dom";
 import style from './style.module.css'
 
-const SearchPage = () => {
+const SearchPage: React.FC = () => {
     // 获取路由参数
     const location = useLocation();
     console.log(location.state);

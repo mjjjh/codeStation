@@ -10,12 +10,14 @@ import ScoreRank from '@/components/ScoreRank';
 import { useSelector, useDispatch } from 'react-redux';
 import { storeIssuePage } from '@/store/storageSlice';
 import { RootState, AppDispatch } from '@/store';
+import useScreenSize from '@/hooks/useScreenSize';
 import style from './style.module.css'
 export const Issues: React.FC = () => {
     const [issuesList, setIssuesList] = useState<IIssueResData[]>([]);
     const issuePage = useSelector((state: RootState) => state.storage.issuePage);
     const dispatch = useDispatch<AppDispatch>();
     const [pageInfo, setPageInfo] = useState(issuePage);
+    const isMobile  = useScreenSize();
     // 获取数据
     const getData = async (params: IIssueReq) => {
         const res = await getIssuesApi({
@@ -40,7 +42,7 @@ export const Issues: React.FC = () => {
         getData({ current: 1, pageSize: pageInfo.pageSize, totalPage: pageInfo.totalPage, typeId: tagId });
     }
 
-    const issuesListRender = issuesList.map((issue: IIssueResData, index) => (<IssueItem key={`issue-${index}-${issue._id}`} issue={issue}></IssueItem>))
+    const issuesListRender = issuesList.map((issue: IIssueResData, index) => (<IssueItem key={`issue-${index}-${issue._id}`} issue={issue} isMobile={isMobile}></IssueItem>))
 
     return (
         <div>

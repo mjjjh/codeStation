@@ -17,7 +17,8 @@ type FieldType = {
 
 const BaseInfo: React.FC<IProps> = ({ nickname, userid, closeModal }) => {
     const [form] = Form.useForm<FieldType>();
-    const checkPwd = async (rule: any, value: string) => {
+    const checkPwd = async (_: any, value: string) => {
+
         if (!value) {
             return Promise.resolve()
         }

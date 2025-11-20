@@ -1,10 +1,8 @@
-import React, { useState, useEffect, use } from "react";
+import React, { useState, useEffect } from "react";
 import { getTopUser } from "@/api/user"
 import { IUserInfo } from "@/types/api"
 import { Card } from "antd";
 import ScoreItem from "../ScoreItem"
-
-import style from "./style.module.css"
 
 const ScoreRank: React.FC = () => {
 

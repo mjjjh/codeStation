@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: "http://localhost:7001",
+        target: "http://81.68.241.10/api",
         changeOrigin: true,
         rewrite: (path) => {
           console.log(path);
@@ -22,7 +22,7 @@ export default defineConfig({
       },
       // 静态资源 
       '/static': {
-        target: "http://localhost:7001",
+        target: "http://81.68.241.10",
         changeOrigin: true
       }
     }
