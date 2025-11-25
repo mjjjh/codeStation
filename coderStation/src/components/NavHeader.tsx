@@ -54,15 +54,7 @@ export default function NavHeader(props: { openModal: () => void }) {
     },
     {
       key: "4",
-      label: (
-        <a
-          href="https://duyi.ke.qq.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          视频教程
-        </a>
-      ),
+      label: <NavLink to="/games">游戏</NavLink>,
     },
   ];
 
@@ -92,7 +84,7 @@ export default function NavHeader(props: { openModal: () => void }) {
       {isMobile ? (
         <div className="mobileNavContainer">
           <Dropdown menu={{ items: menuItems }}>
-              <MenuUnfoldOutlined className="mobileNavButton" />
+            <MenuUnfoldOutlined className="mobileNavButton" />
           </Dropdown>
         </div>
       ) : (
@@ -106,13 +98,9 @@ export default function NavHeader(props: { openModal: () => void }) {
           <NavLink className="navgation" to="/interviews">
             面试题
           </NavLink>
-          <a
-            href="https://duyi.ke.qq.com/"
-            className="navgation"
-            target="_blank"
-          >
-            视频教程
-          </a>
+          <NavLink className="navgation" to="/games">
+            游戏
+          </NavLink>
         </nav>
       )}
       <div className="searchContainer">

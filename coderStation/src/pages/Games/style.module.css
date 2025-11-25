@@ -1,4 +1,4 @@
-.bookContainer {
+.gameContainer {
     width: 90%;
     margin: 0 auto;
     /* outline: 1px solid red; */
@@ -9,6 +9,12 @@
     margin-top: 10px;
 }
 
+.numberContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-weight: 200;
+}
 
 .pagination {
     display: flex;

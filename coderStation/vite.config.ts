@@ -11,6 +11,7 @@ export default defineConfig({
     }
   },
   server: {
+    host: '0.0.0.0',
     proxy: {
       '/api': {
         target: "http://81.68.241.10/api",
@@ -23,6 +24,11 @@ export default defineConfig({
       // 静态资源 
       '/static': {
         target: "http://81.68.241.10",
+        changeOrigin: true
+      },
+      // socket
+      '/socket': {
+        target: "http://81.68.241.10:3001",
         changeOrigin: true
       }
     }

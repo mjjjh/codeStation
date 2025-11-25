@@ -34,6 +34,13 @@ const routerBeforeConfig = [
     {
         path: '/personal',
         isNeedLogin: true
+    }, {
+        path: '/games',
+        isNeedLogin: false
+    },
+    {
+        path: '/games/fiveChess',
+        isNeedLogin: false
     }
 
 ]
