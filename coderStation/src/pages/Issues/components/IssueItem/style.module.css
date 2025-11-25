@@ -10,6 +10,50 @@
     border-bottom: 1px solid #ccc;
 }
 
+/* 移动端容器样式 */
+.mobileContainer {
+    height: auto;
+    padding: 15px 0;
+    display: block;
+}
+
+/* 移动端issue容器 */
+.mobileIssueContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 移动端统计数据区域 */
+.mobileStats {
+    display: flex;
+    gap: 20px;
+    margin-top: 5px;
+}
+
+/* 移动端单个统计项 */
+.mobileStatItem {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: rgb(102, 102, 102);
+    font-weight: 200;
+}
+
+/* 统计数字 */
+.statNumber {
+    font-size: 16px;
+    font-weight: 500;
+    color: #108ee9;
+}
+
+/* 统计标签 */
+.statLabel {
+    font-size: 14px;
+    color: rgb(102, 102, 102);
+}
+
 .issueNum {
     height: 80px;
     /* outline: 1px solid red; */
@@ -36,7 +80,6 @@
 .top {
     font-weight: 500;
     font-size: 16px;
-    width: 100%;
     cursor: pointer;
 }
 

@@ -571,12 +571,13 @@ const FiveChess: React.FC = () => {
           justifyContent: "center",
         }}
         closable={false}
+        closeIcon={null}
         maskClosable={false}
         footer={null}
       >
         <Spin tip="Loading">等待对方确认...</Spin>
       </Modal>
-      <Modal open={noticeShow}>
+      <Modal open={noticeShow} closeIcon={null} footer={null}>
         <Alert
           description={noticeMessage}
           type={noticeType}

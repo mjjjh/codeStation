@@ -52,7 +52,7 @@ const BookDtail: React.FC = () => {
             <div className={style.bookInfoContainer}>
                 <div className={style.leftSide}>
                     <div className={style.img}>
-                        <Image width={210} height={300} className={style.bookPic} src={bookInfo?.bookPic} alt="" />
+                        <Image height={300} className={style.bookPic} src={bookInfo?.bookPic} alt="" />
                     </div>
                     <div>
                         <span className={style.downloadLink} onClick={download}>下载</span>所需积分

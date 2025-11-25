@@ -37,6 +37,19 @@ const Discuss: React.FC<IProps> = ({ commentType, issueId, bookId, typeId }) => 
 
     const dispatch = useDispatch<AppDispatch>()
 
+
+    const toolbarItems = [
+        // ['heading', 'bold', 'italic', 'strike'], // 标题、粗体、斜体、删除线
+        // ['ul', 'ol', 'task'], // 无序列表、有序列表、任务列表
+        ['link', 'image'], // 链接、图片、表格
+        // ['code', 'codeblock'], // 代码、代码块
+        // ['hr', 'quote'], // 分隔线、引用
+        // ['undo', 'redo'], // 撤销、重做
+        // ['fullscreen'], // 全屏（可选）
+        // 🔥 关键：删除 'modeSwitch'（模式切换按钮）
+    ];
+
+
     // 获取数据
     const getData = async (params: { page: number, pageSize: number } = { page: 1, pageSize: 10 }) => {
         if (commentType === 1) {
@@ -119,16 +132,18 @@ const Discuss: React.FC<IProps> = ({ commentType, issueId, bookId, typeId }) => 
     return (
         <div className={style.discussContainer}>
             {/* 评论 */}
-            <Comment key='comment' avatar={avatar} name={userInfo?.nickname} rightSide={(
+            <Comment key='comment' avatar={avatar.src || avatar.icon} name={userInfo?.nickname} rightSide={(
                 <>
                     <Editor
                         style={{ width: "100%" }}
-                        initialValue=""
+                        toolbarItems={toolbarItems}
                         previewStyle="vertical"
                         height="300px"
-                        initialEditType="markdown"
+                        initialEditType="wysiwyg"
+                        hideModeSwitch={true}
                         useCommandShortcut={true}
                         ref={editorRef}
+                        initialValue=" "
                     />
                     <Button disabled={!isLogin} className={style.reply} onClick={handleReply} type="primary">回复</Button>
                 </>

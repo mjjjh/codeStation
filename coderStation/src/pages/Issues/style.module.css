@@ -8,11 +8,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    gap: 5vw;
     background-color: #fff;
 }
 
 .leftSide {
-    width: 65%;
+    /* width: 65%; */
+    flex: 1;
     height: 100%;
     /* outline: 1px solid #ccc; */
 }

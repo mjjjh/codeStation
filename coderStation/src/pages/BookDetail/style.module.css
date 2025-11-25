@@ -8,13 +8,15 @@
 
 .leftSide {
     width: 25%;
-    min-width: 210px;
+    min-width: 150px;
     text-align: center;
 }
 
 .img {
     text-align: center;
-    height: 350px;
+    width: 100%;
+    aspect-ratio: 1;
+    /* height: 350px; */
     box-shadow: 0 0 1px #ccc;
     border-radius: 10px;
     margin-bottom: 20px;

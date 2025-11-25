@@ -35,7 +35,7 @@ const ScreenBreaker: React.FC<ScreenBreakerProps> = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
 
-  let dpr = window.devicePixelRatio || 1;
+  const dpr = window.devicePixelRatio || 1;
   let shards: Shard[] = [];
   let raf: number | null = null;
   let lastTs = 0;
@@ -228,7 +228,7 @@ const ScreenBreaker: React.FC<ScreenBreakerProps> = ({
     };
     // 自动触发
     handleClick({ clientX: width / 2, clientY: height / 2 } as MouseEvent);
-    
+
     // 清理函数 - 组件卸载时重置图片显示状态
     return () => {
       if (imgRef.current) {

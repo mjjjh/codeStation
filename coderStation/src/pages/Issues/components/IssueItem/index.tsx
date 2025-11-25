@@ -5,8 +5,8 @@ import { RootState, AppDispatch } from "@/store";
 import { getTypeList } from "@/store/typeSlice";
 import { IIssueResData } from "@/types/api";
 import { formatTime } from "@/utils/tools";
-import { Tag,Typography } from "antd";
-import style from "@/css/IssueItem.module.css"
+import { Tag, Typography } from "antd";
+import style from "./style.module.css"
 interface IIsueItemProps {
     issue: IIssueResData
     isMobile: boolean

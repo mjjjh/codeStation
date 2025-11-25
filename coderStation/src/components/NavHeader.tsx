@@ -5,8 +5,8 @@ import { Input, Select, Space, Dropdown } from "antd";
 import type { MenuProps } from "antd";
 import {
   DownOutlined,
-  QuestionCircleFilled,
-  BookFilled,
+  ProfileOutlined,
+  ReadOutlined,
   MenuUnfoldOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
@@ -26,14 +26,14 @@ export default function NavHeader(props: { openModal: () => void }) {
     {
       value: "answer",
       label: isMobile ? (
-        <QuestionCircleFilled style={{ fontSize: "12px" }} />
+        <ProfileOutlined style={{ fontSize: "12px" }} />
       ) : (
         "问答"
       ),
     },
     {
       value: "book",
-      label: isMobile ? <BookFilled style={{ fontSize: "12px" }} /> : "书籍",
+      label: isMobile ? <ReadOutlined style={{ fontSize: "12px" }} /> : "书籍",
     },
     // { value: 'interview', label: '面试题' },
   ];
@@ -75,9 +75,13 @@ export default function NavHeader(props: { openModal: () => void }) {
     });
   };
 
+  const goHome = () => {
+    navigate(`/`);
+  };
+
   return (
     <div className="headerContainer">
-      <div className="logoContainer">
+      <div className="logoContainer" onClick={goHome}>
         <div className="logo"></div>
       </div>
       {/* 响应式导航 - 大屏显示普通导航，小屏显示下拉菜单 */}

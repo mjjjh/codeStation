@@ -17,7 +17,7 @@ export const Issues: React.FC = () => {
     const issuePage = useSelector((state: RootState) => state.storage.issuePage);
     const dispatch = useDispatch<AppDispatch>();
     const [pageInfo, setPageInfo] = useState(issuePage);
-    const isMobile  = useScreenSize();
+    const isMobile = useScreenSize();
     // 获取数据
     const getData = async (params: IIssueReq) => {
         const res = await getIssuesApi({
@@ -47,7 +47,7 @@ export const Issues: React.FC = () => {
     return (
         <div>
             <PageHeader title="问题列表" tagClick={serchByTag}></PageHeader>
-            <div className={style.issueContainer}>
+            <div className={style.issueContainer} >
                 <div className={style.leftSide}>
                     {
                         issuesList.length === 0 ? <Empty></Empty>
@@ -58,7 +58,7 @@ export const Issues: React.FC = () => {
                                 </div>
                             </>}
                 </div>
-                <div className={style.rightSide}>
+                <div className={style.rightSide} style={{ display: isMobile ? 'none' : 'block' }}>
                     <AddButton></AddButton>
                     <Recommend></Recommend>
                     <ScoreRank></ScoreRank>

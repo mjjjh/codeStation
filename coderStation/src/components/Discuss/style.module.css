@@ -1,4 +1,6 @@
-.discussContainer {}
+.discussContainer {
+    width: 100%;
+}
 
 .reply {
     margin-top: 20px;

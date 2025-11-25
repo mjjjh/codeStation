@@ -30,6 +30,14 @@ export default defineConfig({
       '/socket': {
         target: "http://81.68.241.10:3001",
         changeOrigin: true
+      },
+      // ai
+      '/ai': {
+        target: "http://81.68.241.10:3000",
+        changeOrigin: true,
+        rewrite: (path) => {
+          return path.replace(/^\/ai/, '')
+        }
       }
     }
   }

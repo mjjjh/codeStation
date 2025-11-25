@@ -11,6 +11,7 @@ import { Avatar } from "antd";
 import { formatTime } from '@/utils/tools';
 import HtmlRenderer from '@/components/HtmlRenderer';
 import Discuss from "@/components/Discuss";
+import useScreenSize from '@/hooks/useScreenSize';
 
 import style from "./style.module.css"
 
@@ -21,6 +22,7 @@ const IssueDetail: React.FC = () => {
 
     const [issueDetail, setIssueDetail] = useState<IIssueDetailRes>();
     const [userInfo, setUserInfo] = useState<IUserInfo>();
+    const isMobile = useScreenSize();
 
     useEffect(() => {
         async function getData() {
@@ -56,11 +58,11 @@ const IssueDetail: React.FC = () => {
                     <Discuss commentType={1} issueId={issueDetail?._id as string} typeId={issueDetail?.typeId as string}></Discuss>
                 </div>
 
-                <div className={style.rightSide}>
+                {!isMobile && <div className={style.rightSide} >
                     <AddButton></AddButton>
                     <Recommend></Recommend>
                     <ScoreRank></ScoreRank>
-                </div>
+                </div>}
             </div>
         </div >
     )

@@ -35,7 +35,7 @@
   width: 100%;
   height: 40px;
   /* outline: 1px solid red; */
-  background: url("../../public/logo1.png") no-repeat;
+  background: url("../../public/logo.png") no-repeat;
   background-size: contain;
   background-position: center;
   transform: scale(1.3);
@@ -100,7 +100,7 @@
 
 .footer .linkItem {
   margin-right: 10px;
-   white-space: nowrap;
+  white-space: nowrap;
 }
 
 
@@ -118,16 +118,17 @@
   .navContainer {
     display: none;
   }
+
   .header {
     width: 100vw;
     padding: 0 15px;
   }
-  
+
   /* 移动端导航菜单容器样式 */
   .mobileNavContainer {
     margin-right: auto;
   }
-  
+
   /* 移动端导航按钮样式 */
   .mobileNavButton {
     color: #fff;
@@ -135,56 +136,61 @@
     padding: 4px 12px;
     /* 过渡效果 */
     transition: transform 0.3s ease-in-out;
-    
+
     &:hover {
       transform: scale(1.1) rotate(90deg);
     }
   }
-  
+
   /* 移动端搜索框适配 */
   .searchContainer {
     width: 160px;
     /* flex: 1; */
   }
-  
+
   /* 移动端搜索框内部组件调整 */
   .searchContainer .ant-space-compact {
     display: flex;
     width: 100%;
   }
-  
+
   /* 移动端搜索框下拉选择器调整 */
   .searchContainer .ant-select {
-    min-width: 35px;
+    min-width: 40px;
   }
+
   .ant-select-dropdown {
-    min-width: 35px;
+    min-width: 45px;
   }
-  
-  
+
+
   /* 移动端头部容器适配 */
   .headerContainer {
     justify-content: flex-start;
     align-items: center;
     gap: 2px;
   }
-  
+
   /* 移动端logo适配 */
   .logoContainer {
-    width: 100px;
+    width: 70px;
   }
-  
-  
+
+
   /* 移动端登录按钮适配 */
   .loginBtnContainer {
     flex: 1;
     margin-left: auto;
 
   }
-  
+
   /* 移动端内容区域适配 */
   .content {
     margin-top: 80px;
     width: 100%;
   }
+}
+
+.ai-chat-modal .ant-modal-content {
+  padding: 0 3px;
 }
