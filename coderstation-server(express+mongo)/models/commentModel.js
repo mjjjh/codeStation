@@ -20,6 +20,8 @@ const commentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "typeModel", // 关联的模型
     }, //  所属分类
+    issueTitle: String, // 问题标题
+    bookName: String, // 书籍名称
     commentContent: String, // 对应评论
     commentDate: String, // 评论日期
     commentType: Number, // 评论类型

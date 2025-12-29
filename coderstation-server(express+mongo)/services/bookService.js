@@ -23,11 +23,13 @@ module.exports.findBookByPageService = async function (queryObj) {
 /**
  * 根据 id 获取其中一本书籍信息
  */
-module.exports.findBookByIdService = async function (id) {
+module.exports.findBookByIdService = async function (id, observer) {
   const book = await findBookByIdDao(id);
+  if (observer) {
     // 浏览数加一
-  book.scanNumber += 1;
-  await book.save();
+    book.scanNumber += 1;
+    await book.save();
+  }
   return book;
 };
 
@@ -35,9 +37,11 @@ module.exports.findBookByIdService = async function (id) {
  * 新增书籍
  */
 module.exports.addBookService = async function (newBookInfo) {
-  console.log(newBookInfo,'newBookInfo');
+  console.log(newBookInfo, "newBookInfo");
   // 首先进行同步的数据验证
   const validateResult = validate.validate(newBookInfo, bookRule);
+  console.log("验证结果", validateResult);
+
   if (!validateResult) {
     // 验证通过
 
@@ -48,8 +52,8 @@ module.exports.addBookService = async function (newBookInfo) {
     newBookInfo.onShelfDate = new Date().getTime().toString();
 
     // 如果没有上传图片，则默认给一张图片
-    if(!newBookInfo.bookPic){
-      newBookInfo.bookPic = '/static/imgs/noPic.jpg';
+    if (!newBookInfo.bookPic) {
+      newBookInfo.bookPic = "/static/imgs/noPic.jpg";
     }
     return await addBookDao(newBookInfo);
   } else {
@@ -66,7 +70,7 @@ module.exports.deleteBookService = async function (id) {
 
   // 获取该 bookId 对应的所有评论
   const commentResult = await findBookCommentByIdDao(id);
-  console.log(commentResult,'commentResult');
+  console.log(commentResult, "commentResult");
   for (let i = 0; i < commentResult.length; i++) {
     await deleteCommentDao(commentResult[i]._id);
   }

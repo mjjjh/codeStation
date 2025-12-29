@@ -29,7 +29,7 @@ router.get("/", async function (req, res) {
  * 根据 id 获取其中一个问答具体信息
  */
 router.get("/:id", async function (req, res) {
-  const result = await findIssueByIdService(req.params.id);
+  const result = await findIssueByIdService(req.params.id,true);
   res.send(formatResponse(0, "", result));
 });
 

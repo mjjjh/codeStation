@@ -123,7 +123,7 @@ exports.bookRule = {
     presence: {
       allowEmpty: false,
     },
-    type: "number",
+    type: "string",
   },
   typeId: {
     presence: {

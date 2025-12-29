@@ -4,15 +4,13 @@ const {
   addIssueDao,
   deleteIssueDao,
   updateIssueDao,
-  searchIssueByPageDao
+  searchIssueByPageDao,
 } = require("../dao/issueDao");
 const {
   findIssueCommentByIdDao,
   deleteCommentDao,
 } = require("../dao/commentDao");
-const {
-  findUserByIdDao
-} = require("../dao/userDao");
+const { findUserByIdDao } = require("../dao/userDao");
 const { validate } = require("validate.js");
 const { issueRule } = require("./rules");
 const { ValidationError } = require("../utils/errors");
@@ -23,7 +21,7 @@ const { ValidationError } = require("../utils/errors");
 module.exports.findIssueByPageService = async function (queryObj) {
   // 获取分页数据
   const result = await findIssueByPageDao(queryObj);
-  
+
   // 如果有数据，为每条记录添加用户昵称
   if (result.data && result.data.length > 0) {
     for (let i = 0; i < result.data.length; i++) {
@@ -40,17 +38,17 @@ module.exports.findIssueByPageService = async function (queryObj) {
       }
     }
   }
-  
+
   return result;
 };
 
 /**
  * 根据 id 获取其中一个问答信息
  */
-module.exports.findIssueByIdService = async function (id) {
+module.exports.findIssueByIdService = async function (id, observer) {
   // 获取问答信息
   const issue = await findIssueByIdDao(id);
-  
+
   // 如果存在且有userId，获取用户昵称
   if (issue && issue.userId) {
     try {
@@ -62,10 +60,12 @@ module.exports.findIssueByIdService = async function (id) {
       console.error("获取用户昵称失败:", error);
     }
   }
-  // 浏览数加一
-  issue.scanNumber += 1;
-  await issue.save();
-  
+  if (observer) {
+    // 浏览数加一
+    issue.scanNumber += 1;
+    await issue.save();
+  }
+
   return issue;
 };
 

@@ -20,7 +20,7 @@ const { formatResponse } = require("../utils/tools");
  * 根据分页获取书籍
  */
 router.get("/", async function (req, res) {
-  const result = await findBookByPageService(req.query)
+  const result = await findBookByPageService(req.query);
   res.send(formatResponse(0, "", result));
 });
 
@@ -28,7 +28,7 @@ router.get("/", async function (req, res) {
  * 获取其中一本书籍信息
  */
 router.get("/:id", async function (req, res) {
-  const result = await findBookByIdService(req.params.id);
+  const result = await findBookByIdService(req.params.id, true);
   res.send(formatResponse(0, "", result));
 });
 

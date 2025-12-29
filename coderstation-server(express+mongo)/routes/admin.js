@@ -13,7 +13,7 @@ const {
   updateAdminService,
   findAllAdminService,
   findAdminByIdService,
-  adminIsExistService
+  adminIsExistService,
 } = require("../services/adminService");
 
 const { formatResponse, analysisToken } = require("../utils/tools");
@@ -112,7 +112,7 @@ router.patch("/:id", async function (req, res) {
 /**
  * 根据 loginId 来查找该管理员是否存在
  */
- router.get("/adminIsExist/:loginId", async function (req, res) {
+router.get("/adminIsExist/:loginId", async function (req, res) {
   const result = await adminIsExistService(req.params.loginId);
   res.send(formatResponse(0, "", result));
 });

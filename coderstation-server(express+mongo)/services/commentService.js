@@ -11,23 +11,60 @@ const {
   findIssueCommentByIdDao,
   findBookCommentByIdDao,
 } = require("../dao/commentDao");
-const {
-  findUserByIdDao
-} = require("../dao/userDao");
+const { findUserByIdDao } = require("../dao/userDao");
 
-const {findIssueByIdService} = require("./issueService");
-const {findBookByIdService} = require("./bookService");
+const { findIssueByIdService } = require("./issueService");
+const { findBookByIdService } = require("./bookService");
 const { commentRule } = require("./rules");
 const { ValidationError } = require("../utils/errors");
 
 /**
  * 根据分页查找对应模块评论
+ * commentType: 1表示issue,2表示book
  */
 module.exports.findCommentByPageAndTypeService = async function (
   commentType,
   pager
 ) {
-  return await findCommentByPageAndTypeDao(commentType, pager);
+  const results = await findCommentByPageAndTypeDao(commentType, pager);
+  if (results) {
+    for (item in results.data) {
+      if (results.data[item].issueId) {
+        try {
+          const issueInfo = await findIssueByIdService(
+            results.data[item].issueId
+          );
+          if (issueInfo) {
+            results.data[item].issueTitle = issueInfo.issueTitle;
+          }
+        } catch (error) {
+          console.error("获取用户昵称失败:", error);
+        }
+      }
+      if (results.data[item].bookId) {
+        try {
+          const bookInfo = await findBookByIdService(results.data[item].bookId);
+          if (bookInfo) {
+            results.data[item].bookName = bookInfo.bookTitle;
+          }
+        } catch (error) {
+          console.error("获取用户昵称失败:", error);
+        }
+      }
+      if (results.data[item].userId) {
+        try {
+          const userInfo = await findUserByIdDao(results.data[item].userId);
+          if (userInfo) {
+            results.data[item].nickname = userInfo.nickname;
+            results.data[item].avatar = userInfo.avatar;
+          }
+        } catch (error) {
+          console.error("获取用户昵称失败:", error);
+        }
+      }
+    }
+    return results;
+  }
 };
 
 /**
@@ -35,25 +72,24 @@ module.exports.findCommentByPageAndTypeService = async function (
  */
 module.exports.findIssueCommentByIdService = async function (id, pager) {
   const res = await findIssueCommentByIdDao(id, pager);
-    // 如果存在且有userId，获取用户昵称
-    if (res) {
-      for(item in res.data) {
-        if (res.data[item].userId) {
-          try {
-            const userInfo = await findUserByIdDao(res.data[item].userId);
-            if (userInfo) {
-              res.data[item].nickname = userInfo.nickname;
-              res.data[item].avatar = userInfo.avatar;
-            }
-          } catch (error) {
-            console.error("获取用户昵称失败:", error);
+  // 如果存在且有userId，获取用户昵称
+  if (res) {
+    for (item in res.data) {
+      if (res.data[item].userId) {
+        try {
+          const userInfo = await findUserByIdDao(res.data[item].userId);
+          if (userInfo) {
+            res.data[item].nickname = userInfo.nickname;
+            res.data[item].avatar = userInfo.avatar;
           }
+        } catch (error) {
+          console.error("获取用户昵称失败:", error);
         }
       }
     }
-    
-    
-    return res;
+  }
+
+  return res;
 };
 
 /**
@@ -61,22 +97,22 @@ module.exports.findIssueCommentByIdService = async function (id, pager) {
  */
 module.exports.findBookCommentByIdService = async function (id, pager) {
   const res = await findBookCommentByIdDao(id, pager);
-    // 如果存在且有userId，获取用户昵称
-    if (res) {
-      for(item in res.data) {
-        if (res.data[item].userId) {
-          try {
-            const userInfo = await findUserByIdDao(res.data[item].userId);
-            if (userInfo) {
-              res.data[item].nickname = userInfo.nickname;
-              res.data[item].avatar = userInfo.avatar;
-            }
-          } catch (error) {
-            console.error("获取用户昵称失败:", error);
+  // 如果存在且有userId，获取用户昵称
+  if (res) {
+    for (item in res.data) {
+      if (res.data[item].userId) {
+        try {
+          const userInfo = await findUserByIdDao(res.data[item].userId);
+          if (userInfo) {
+            res.data[item].nickname = userInfo.nickname;
+            res.data[item].avatar = userInfo.avatar;
           }
+        } catch (error) {
+          console.error("获取用户昵称失败:", error);
         }
       }
     }
+  }
   return res;
 };
 
@@ -92,10 +128,9 @@ module.exports.addCommentService = async function (newCommentInfo) {
   } else {
     newCommentInfo.bookId = "";
   }
-  
+
   return validate.async(newCommentInfo, commentRule).then(
     async function () {
-
       // 评论数加一
       if (newCommentInfo.issueId) {
         const issue = await findIssueByIdService(newCommentInfo.issueId);
